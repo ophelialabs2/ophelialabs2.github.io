@@ -22,5 +22,6 @@ makedocs(;
 deploydocs(;
     repo="github.com/ophelialabs2/ophelialabs2.github.io",
     devbranch="main",
+    branch="main",
     push_preview=true,
 )

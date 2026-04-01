@@ -28,22 +28,3 @@ jobs:
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Copy built docs to root
-        run: |
-          if [ -d "docs/build" ]; then
-            rm -rf assets manual search.html search_index.js examples.html index.html 2>/dev/null || true
-            cp -r docs/build/* .
-            echo "Documentation copied successfully"
-          else
-            echo "ERROR: docs/build directory not found!"
-            exit 1
-          fi
-      
-      - name: Commit and push documentation
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Build and deploy documentation"
-          commit_options: '--allow-empty'
-          file_pattern: 'index.html assets manual search.* examples.html'

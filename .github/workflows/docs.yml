@@ -29,10 +29,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Check if docs were built
+        run: ls -la docs/build/ || echo "No build directory found"
+      
       - name: Copy built docs to root
         run: |
-          rm -rf assets manual search.html search_index.js examples.html index.html 2>/dev/null || true
-          cp -r docs/build/* .
+          if [ -d "docs/build" ]; then
+            rm -rf assets manual search.html search_index.js examples.html index.html 2>/dev/null || true
+            cp -r docs/build/* .
+            echo "Documentation copied successfully"
+          else
+            echo "ERROR: docs/build directory not found!"
+            exit 1
+          fi
       
       - name: Commit and push doc changes
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -43,4 +52,6 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Build and deploy documentation"
             git push
+          else
+            echo "No changes to commit"
           fi

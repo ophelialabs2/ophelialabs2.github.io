@@ -1,6 +1,7 @@
 using Documenter, MyDocumentedPackage
 
 makedocs(;
+    build="../",
     modules=[MyDocumentedPackage],
     authors="ophelialabs2",
     repo="https://github.com/ophelialabs2/ophelialabs2.github.io/blob/{commit}{path}#{line}",

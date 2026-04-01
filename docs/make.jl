@@ -25,5 +25,5 @@ touch(joinpath(@__DIR__, "build", ".nojekyll"))
 deploydocs(;
     repo="github.com/ophelialabs2/ophelialabs2.github.io",
     devbranch="main",
-    branch="gh-pages",
+    branch="master",
 )

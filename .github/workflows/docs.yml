@@ -10,7 +10,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - uses: julia-actions/setup-julia@v1
         with:
@@ -29,9 +29,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Check if docs were built
-        run: ls -la docs/build/ || echo "No build directory found"
-      
       - name: Copy built docs to root
         run: |
           if [ -d "docs/build" ]; then
@@ -43,19 +40,10 @@ jobs:
             exit 1
           fi
       
-      - name: Commit and push doc changes
+      - name: Commit and push documentation
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        env:
-          GIT_USER_NAME: github-actions[bot]
-          GIT_USER_EMAIL: github-actions[bot]@users.noreply.github.com
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --local user.email "${{ env.GIT_USER_EMAIL }}"
-          git config --local user.name "${{ env.GIT_USER_NAME }}"
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "Build and deploy documentation [ci skip]"
-            git push --quiet "https://${{ github.actor }}:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" main
-          else
-            echo "No changes to commit"
-          fi
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Build and deploy documentation"
+          commit_options: '--allow-empty'
+          file_pattern: 'index.html assets manual search.* examples.html'

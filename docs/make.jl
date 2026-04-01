@@ -6,9 +6,8 @@ makedocs(;
     repo="https://github.com/ophelialabs2/ophelialabs2.github.io/blob/{commit}{path}#{line}",
     sitename="MyDocumentedPackage.jl",
     format=Documenter.HTML(;
-        prettyurls=get(ENV, "CI", nothing) == "true",
+        prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://ophelialabs2.github.io",
-        assets=String[],
     ),
     pages=[
         "Home" => "index.md",

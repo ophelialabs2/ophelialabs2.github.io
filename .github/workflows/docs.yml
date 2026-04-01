@@ -28,4 +28,19 @@ jobs:
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+      
+      - name: Copy built docs to root
+        run: |
+          rm -rf assets manual search.html search_index.js examples.html index.html 2>/dev/null || true
+          cp -r docs/build/* .
+      
+      - name: Commit and push doc changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Build and deploy documentation"
+            git push
+          fi

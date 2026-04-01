@@ -1,7 +1,6 @@
 using Documenter, MyDocumentedPackage
 
 makedocs(;
-    build="../",
     modules=[MyDocumentedPackage],
     authors="ophelialabs2",
     repo="https://github.com/ophelialabs2/ophelialabs2.github.io/blob/{commit}{path}#{line}",
@@ -20,9 +19,10 @@ makedocs(;
     ],
 )
 
-deploydocs(;
-    repo="github.com/ophelialabs2/ophelialabs2.github.io",
-    devbranch="main",
-    branch="main",
-    push_preview=true,
-)
+# deploydocs disabled until DOCUMENTER_KEY is configured
+# deploydocs(;
+#     repo="github.com/ophelialabs2/ophelialabs2.github.io",
+#     devbranch="main",
+#     branch="main",
+#     push_preview=true,
+# )

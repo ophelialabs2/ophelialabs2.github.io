@@ -1,0 +1,15 @@
+name = "MyDocumentedPackage"
+uuid = "a1b2c3d4-e5f6-47a8-9b0c-d1e2f3a4b5c6"
+authors = ["Your Name <you@example.com>"]
+version = "0.1.0"
+
+[deps]
+
+[compat]
+julia = "1.6"
+
+[extras]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[targets]
+docs = ["Documenter"]

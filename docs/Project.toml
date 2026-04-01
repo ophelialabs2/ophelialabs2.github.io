@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+MyDocumentedPackage = "a1b2c3d4-e5f6-47a8-9b0c-d1e2f3a4b5c6"
+
+[compat]
+Documenter = "0.27"

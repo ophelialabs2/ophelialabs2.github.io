@@ -1,0 +1,22 @@
+# Documenter.jl
+docs/build/
+docs/site/
+
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+/deps/deps.jl
+
+# VS Code
+.vscode/
+*.swp
+*.swo
+*~
+
+# System
+.DS_Store
+Thumbs.db
+
+# Manifest
+Manifest.toml

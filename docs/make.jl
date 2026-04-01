@@ -19,10 +19,11 @@ makedocs(;
     ],
 )
 
-# deploydocs disabled until DOCUMENTER_KEY is configured
-# deploydocs(;
-#     repo="github.com/ophelialabs2/ophelialabs2.github.io",
-#     devbranch="main",
-#     branch="main",
-#     push_preview=true,
-# )
+# Create .nojekyll file to prevent Jekyll processing
+touch(joinpath(@__DIR__, "build", ".nojekyll"))
+
+deploydocs(;
+    repo="github.com/ophelialabs2/ophelialabs2.github.io",
+    devbranch="main",
+    branch="gh-pages",
+)
